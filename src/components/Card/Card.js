@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './CardStyle.css';
 
-const Card = ({ title, content, image }) => {
+const Card = ({ title, content, image , onClick }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -17,6 +17,7 @@ const Card = ({ title, content, image }) => {
       className={`card ${isHovered ? 'hovered' : ''}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={onClick}
     >
       <h2>{title}</h2>
       <img src={image} alt={title} className="card-image"/>

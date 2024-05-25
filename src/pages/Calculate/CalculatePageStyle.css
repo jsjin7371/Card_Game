@@ -1,12 +1,7 @@
 .CalculatePage {
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     display: flex;
 }
 
-.CardTable {
-    display: flex;
-    justify-content: space-around;
-    max-width: 1200px;
-    width: 80%;
-}

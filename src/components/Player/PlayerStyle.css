@@ -1,0 +1,12 @@
+.Player {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.CardTable {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    width: 80%;
+}
