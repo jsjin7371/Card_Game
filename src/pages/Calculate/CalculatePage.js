@@ -12,7 +12,8 @@ function CalculatePage() {
     const movePage = useNavigate();
     const [monsterHealth, setMonsterHealth] = useState(100);
     const [playerHealth, setPlayerHealth] = useState(100);
-    const [isPlayerTurn, setIsPlayerTurn] = useState(true);
+    const [playerShake, setPlayerShake] = useState(false);
+    const [monsterShake, setMonsterShake] = useState(false);
 
     useEffect(() => {
         if(monsterHealth === 0){
@@ -20,31 +21,29 @@ function CalculatePage() {
         }
     }, [monsterHealth, movePage]);
 
-    useEffect(() => {
-        if (!isPlayerTurn && monsterHealth > 0) {
-          const monsterAttack = setTimeout(() => {
-            const damage = Math.floor(Math.random() * 20) + 5; // 몬스터의 공격력
-            setPlayerHealth((prevHealth) => Math.max(prevHealth - damage, 0));
-            setIsPlayerTurn(true);
-          }, 1000); // 몬스터의 공격 딜레이
-    
-          return () => clearTimeout(monsterAttack);
-        }
-    }, [isPlayerTurn, monsterHealth]);
-
     const handleAttack = (damage) => {
-        if (isPlayerTurn) {
-            setMonsterHealth((prevHealth) => Math.max(prevHealth - damage, 0));
-            setIsPlayerTurn(false);
-        }
+        //플레이어 공격
+        setMonsterShake(true);
+        setMonsterHealth((prevHealth) => Math.max(prevHealth - damage, 0));
+
+        //몬스터 공격
+        setTimeout(() => {
+            setMonsterShake(false);
+            const monsterDamage = Math.floor(Math.random() * 20) + 10;
+            setPlayerShake(true);
+            setPlayerHealth((prevHealth) => Math.max(prevHealth - monsterDamage, 0));
+        }, 500);
+    
+        setTimeout(() => setPlayerShake(false), 1000);
     };
+    
 
     return (
         <div className="CalculatePage">
             
-            <Monster health={monsterHealth}/>
+            <Monster health={monsterHealth} shake={monsterShake}/>
 
-            <Player health={playerHealth} onAttack={handleAttack} />
+            <Player health={playerHealth} onAttack={handleAttack} shake={playerShake}/>
 
         </div>
     );

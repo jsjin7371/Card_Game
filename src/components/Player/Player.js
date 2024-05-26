@@ -2,9 +2,9 @@ import "./PlayerStyle.css"
 
 import Card from "../Card/Card";
 
-const Player = ({ health, onAttack }) => {
+const Player = ({ health, onAttack, shake }) => {
     return (
-        <div className="Player">
+        <div className={`Player ${shake ? 'shake' : ''}`}>
             <div>
                 <h2>Player</h2>
                 <p>Health: {health}</p>

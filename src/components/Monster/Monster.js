@@ -1,10 +1,10 @@
 import './MonsterStyle.css';
 
-const Monster = ({ health }) => {
+const Monster = ({ health, shake }) => {
   return (
-    <div className="monster">
+    <div className={`Monster ${shake ? 'shake' : ''}`}>
       <h2>Monster</h2>
-      <img src="/otter-pixilart.png" className="monster-image"/>
+      <img src="/otter-pixilart.png" className="Monster-image"/>
       <p>Health: {health}</p>
     </div>
   );
